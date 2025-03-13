@@ -39,13 +39,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     padding: 0;
 }
 
-.bookride-bg {
-    background: url('IMAGES/bg2.jpg') no-repeat center center fixed;
-    background-size: cover;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+
 
 /* Card styling */
 .card {
@@ -82,4 +76,73 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     text-align: center;
 }
 
+/* Background for Ride History */
+.ride-history-bg {
+    background: url('IMAGES/bg3.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* Table Styling */
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead {
+    font-size: 1rem;
+}
+
+.badge {
+    font-size: 1rem;
+    padding: 5px 10px;
+}
+
+/* Background */
+.profile-bg {
+    background: url('IMAGES/bg3.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* Profile Card */
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+}
+
+/* Profile Picture */
+img.rounded-circle {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Background for Book a Ride Page */
+.bookride-bg {
+    background: url('IMAGES/bg3.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* Booking Form Styling */
+.card {
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.card h3 {
+    color: #333;
+}
+
+/* Button Effects */
+.btn {
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success:hover {
+    background-color: #008000;
+}
 

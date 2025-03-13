@@ -1,8 +1,4 @@
-<%-- 
-    Document   : home
-    Created on : Mar 13, 2025, 3:00:29 PM
-    Author     : ASUS
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,14 +30,14 @@
                 <h4>Dashboard</h4>
                 <ul class="nav flex-column">
                     <li class="nav-item"><a href="bookRide.jsp" class="nav-link">📌 Book a Ride</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">📜 Ride History</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">👤 Profile</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-danger">🚪 Logout</a></li>
+                    <li class="nav-item"><a href="rideHistory.jsp" class="nav-link">📜 Ride History</a></li>
+                    <li class="nav-item"><a href="customerProfile.jsp" class="nav-link">👤 Profile</a></li>
+                    <li class="nav-item"><a href="index.html" class="nav-link text-danger">🚪 Logout</a></li>
                 </ul>
             </nav>
 
             <!-- Main Content -->
-            <div class="col-md-9 ms-sm-auto p-4">
+            <div class="col-md-9 ms-sm-auto p-4 ">
                 <h2 class="text-white">Welcome to Mega City Cabs!</h2>
                 <p class="text-white">Your personalized riders!</p>
 

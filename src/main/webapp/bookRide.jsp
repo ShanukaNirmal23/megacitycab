@@ -1,8 +1,4 @@
-<%-- 
-    Document   : bookRide
-    Created on : Mar 13, 2025, 10:33:37 PM
-    Author     : ASUS
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
