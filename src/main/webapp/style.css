@@ -8,13 +8,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 
 .loginback {
-    background: url('IMAGES/bg.jpg') no-repeat center center fixed;
+    background: url('IMAGES/TB.png') no-repeat center center fixed;
     background-size: cover;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
+.signupback {
+    background: url('IMAGES/TB.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 /* Sidebar background */
 .sidebar {
     background: rgba(255, 255, 255, 0.9); /* Light semi-transparent */
@@ -32,7 +39,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     padding: 0;
 }
 .driverdash {
-    background: url('IMAGES/bg2.jpg') no-repeat center center fixed;
+    background: url('IMAGES/bg.jpg') no-repeat center center fixed;
     background-size: cover;
     font-family: Arial, sans-serif;
     margin: 0;
@@ -60,6 +67,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 .login-container {
     background: rgba(255, 255, 255, 0.9);
+    opacity: 95%;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px #0000001a;
@@ -145,4 +153,18 @@ img.rounded-circle {
 .btn-success:hover {
     background-color: #008000;
 }
+
+/* Background */
+.new-rides-bg {
+    background: url('IMAGES/bg6.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* Ride Request Cards */
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+}
+
 

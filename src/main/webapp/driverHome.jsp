@@ -30,7 +30,7 @@
             <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar p-3">
                 <h4>Driver Panel</h4>
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a href="#" class="nav-link">📌 New Rides</a></li>
+                    <li class="nav-item"><a href="newRides.jsp" class="nav-link">📌 New Rides</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">🚗 My Rides</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">💰 Earnings</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">👤 Profile</a></li>
