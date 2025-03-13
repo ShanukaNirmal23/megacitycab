@@ -53,7 +53,7 @@ private static final long serialVersionUID = 1L;
                 } else if ("2".equals(role)) {
                     response.sendRedirect("driverDashboard.jsp");
                 } else {
-                    response.sendRedirect("home.jsp");
+                    response.sendRedirect("customerHome.jsp");
                 }
             } else {
                 // Redirect to login page with error message

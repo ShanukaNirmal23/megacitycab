@@ -8,27 +8,72 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 
 body {
-                font-family: Arial, sans-serif;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                background: url('IMAGES/bg.jpg') no-repeat center center/cover;
-            }
-            .login-container {
-                background: rgba(255, 255, 255, 0.9);
-                padding: 30px;
-                border-radius: 10px;
-                box-shadow: 0px 0px 10px 0px #0000001a;
-                width: 350px;
-                text-align: center;
-            }
-            
-             .signup-container {
-                background: rgba(255, 255, 255, 0.9);
-                padding: 30px;
-                border-radius: 10px;
-                box-shadow: 0px 0px 10px 0px #0000001a;
-                width: 350px;
-                text-align: center;
-            }
+    background: url('IMAGES/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sidebar background */
+.sidebar {
+    background: rgba(255, 255, 255, 0.9); /* Light semi-transparent */
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100vh;
+}
+
+/* Main content background */
+.cusdash {
+    background: url('IMAGES/bg2.jpg') no-repeat center center fixed;
+    background-size: cover;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100vh;
+    position: relative;
+}
+.driverdash {
+    background: url('IMAGES/bg2.jpg') no-repeat center center fixed;
+    background-size: cover;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Card styling */
+.card {
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8); /* Light semi-transparent */
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Book Ride button */
+.btn-lg {
+    font-size: 20px;
+    font-weight: bold;
+}
+.login-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #0000001a;
+    width: 350px;
+    text-align: center;
+}
+
+.signup-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #0000001a;
+    width: 350px;
+    text-align: center;
+}
+
+

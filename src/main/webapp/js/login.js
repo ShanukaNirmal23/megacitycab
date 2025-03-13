@@ -33,10 +33,10 @@ function loginUser() {
             .then(response => response.text())
             .then(data => {
                 if (data.includes("Success")) {
-                    window.location.href = "home.jsp";  // Redirect to dashboard on success
+                    window.location.href = "customerHome.jsp";  // Redirect to dashboard on success
                 } else {
 //            errorMessage.innerText = "Invalid Username, Password, or Role!";
-                    window.location.href = "home.jsp";
+                    window.location.href = "customerHome.jsp";
                 }
             })
             .catch(error => {
