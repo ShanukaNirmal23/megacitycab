@@ -18,7 +18,7 @@
 </head>
 <body class="driverdash">
 
-    <div class="row container-fluid">
+    <!--<div class="row container-fluid">-->
     <!-- Navbar -->
     <nav class="navbar navbar-dark bg-dark px-3">
         <a class="navbar-brand fw-bold" href="#">🚖 Mega City Cab</a>
@@ -62,6 +62,7 @@
                             <div class="card-body">
                                 <h5>💰 Total Earnings</h5>
                                 <p>Rs. 5,800</p>
+                                <button class="btn btn-light btn-sm">View Details</button>
                             </div>
                         </div>
                     </div>

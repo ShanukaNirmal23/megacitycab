@@ -18,7 +18,6 @@
 </head>
 <body class="cusdash">
     
-    <div class="row container-fluid">
     <!-- Navbar -->
     <nav class="navbar navbar-dark bg-dark px-3 ">
         <a class="navbar-brand fw-bold" href="#">🚖 Mega City Cab</a>
@@ -86,7 +85,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
-</div>
+
 </html>
 
 
