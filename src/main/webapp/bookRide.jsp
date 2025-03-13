@@ -22,7 +22,7 @@
     <nav class="navbar navbar-dark bg-dark px-3">
         <a class="navbar-brand fw-bold" href="#">🚖 Mega City Cab</a>
         <div>
-            <a href="dashboard.jsp" class="text-white me-3">Dashboard</a>
+            <a href="customerHome.jsp" class="text-white me-3">Dashboard</a>
             <a href="index.html" class="btn btn-danger btn-sm">Logout</a>
         </div>
     </nav>
@@ -37,11 +37,14 @@
                         <form id="rideForm">
                             <div class="mb-3">
                                 <label class="form-label">Pickup Location</label>
+                                
                                 <input type="text" id="pickup" class="form-control" placeholder="Enter pickup location" required>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d63372.5010609498!2d79.8482628!3d6.9167283!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae253d10f7a7003%3A0x320b2e4d32d3838d!2sColombo!5e0!3m2!1sen!2slk!4v1741890441728!5m2!1sen!2slk" width="600" height="250" style="border:0; margin-top: 5px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Drop Location</label>
                                 <input type="text" id="drop" class="form-control" placeholder="Enter drop location" required>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2406643.9855233873!2d79.88193078901783!3d7.830627881078105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2593cf65a1e9d%3A0xe13da4b400e2d38c!2sSri%20Lanka!5e0!3m2!1sen!2slk!4v1741890644246!5m2!1sen!2slk" width="600" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Select Ride Type</label>
@@ -55,7 +58,7 @@
                                 <label class="form-label">Estimated Fare</label>
                                 <input type="text" id="fare" class="form-control" disabled>
                             </div>
-                            <button type="button" class="btn btn-primary w-100" onclick="calculateFare()">📍 Get Fare</button>
+                            <button type="button" class="btn btn-warning w-100" onclick="calculateFare()">📍 Get Fare</button>
                             <button type="submit" class="btn btn-success w-100 mt-2">🚖 Confirm Booking</button>
                         </form>
                     </div>

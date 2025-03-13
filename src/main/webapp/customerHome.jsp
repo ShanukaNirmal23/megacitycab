@@ -33,7 +33,7 @@
             <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar p-3">
                 <h4>Dashboard</h4>
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a href="#" class="nav-link">📌 Book a Ride</a></li>
+                    <li class="nav-item"><a href="bookRide.jsp" class="nav-link">📌 Book a Ride</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">📜 Ride History</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">👤 Profile</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-danger">🚪 Logout</a></li>
