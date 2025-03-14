@@ -191,5 +191,10 @@ img.rounded-circle {
     border-radius: 15px;
 }
 
+.sidebar {
+    height: 600px; /* Full screen height */
+    overflow-y: auto; /* Enables scrolling if content is longer */
+}
+
 
 
