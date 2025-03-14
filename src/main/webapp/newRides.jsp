@@ -15,7 +15,7 @@
     <nav class="navbar navbar-dark bg-dark px-3">
         <a class="navbar-brand fw-bold" href="#">🚖 Mega City Cab</a>
         <div>
-            <a href="driverDashboard.jsp" class="text-white me-3">Dashboard</a>
+            <a href="driverHome.jsp" class="text-white me-3">Dashboard</a>
             <a href="index.html" class="btn btn-danger btn-sm">Logout</a>
         </div>
     </nav>

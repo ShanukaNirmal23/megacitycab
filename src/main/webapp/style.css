@@ -167,4 +167,18 @@ img.rounded-circle {
     border-radius: 15px;
 }
 
+/* Background */
+.driver-rides-bg {
+    background: url('IMAGES/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* Ride Cards */
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+}
+
+
 
