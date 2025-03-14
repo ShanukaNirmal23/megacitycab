@@ -179,6 +179,17 @@ img.rounded-circle {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
 }
+/* Background */
+.driver-earnings-bg {
+    background: url('IMAGES/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* Earnings Cards */
+.card {
+    border-radius: 15px;
+}
 
 
 
