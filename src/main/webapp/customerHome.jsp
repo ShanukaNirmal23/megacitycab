@@ -16,7 +16,7 @@
 
         <!-- Navbar -->
         <nav class="navbar navbar-dark bg-dark px-3 ">
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><img src="IMAGES/lines.png" style="height: 35px;" alt="alt"/></button>
+            <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><img src="IMAGES/lines.png" style="height: 35px;" alt="alt"/></button>
             <a class="navbar-brand fw-bold" href="#">🚖 Mega City Cab</a>
             <div>
                 <a href="#" class="text-white me-3">Profile</a>
