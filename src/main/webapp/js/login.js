@@ -8,7 +8,9 @@ function loginUser() {
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
     let role = document.getElementById("role").value;
-    let errorMessage = document.getElementById("error-message");
+     let errorMessage = document.getElementById("message");
+
+
 
 //    alert(role);
 
@@ -20,27 +22,24 @@ function loginUser() {
     }
 
     // Prepare form data
-    let formData = new FormData();
-    formData.append("username", username);
-    formData.append("password", password);
-    formData.append("role", role);
+    var form = new FormData();
+    form.append("username", username);
+    form.append("password", password);
+    form.append("role", role);
 
-    // Send login request to the servlet
-    fetch("/login", {
-        method: "POST",
-        body: formData
-    })
-            .then(response => response.text())
-            .then(data => {
-                if (data.includes("Success")) {
-                    window.location.href = "customerHome.jsp";  // Redirect to dashboard on success
-                } else {
-//            errorMessage.innerText = "Invalid Username, Password, or Role!";
-                    window.location.href = "customerHome.jsp";
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                errorMessage.innerText = "Server Error. Please try again later.";
-            });
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4) {
+            var t = r.responseText;
+            if (t == "Success") {
+                window.location.href = "customerHome.jsp";
+            } else {
+                errorMessage.innerText = "Invalid Username, Password, or Role!";
+            }
+        }
+    };
+
+    r.open("POST", "login", true);
+    r.send(form);
+
 }
