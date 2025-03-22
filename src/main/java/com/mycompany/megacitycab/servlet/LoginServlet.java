@@ -1,5 +1,7 @@
 package com.mycompany.megacitycab.servlet;
 
+
+import com.mycompany.megacitycab.util.DBConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,16 +10,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/mega_city_cab";
-    private static final String DB_USER = "root"; // Replace with your MySQL username
-    private static final String DB_PASSWORD = "Shanuka@123"; // Replace with your MySQL password
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -31,7 +29,7 @@ public class LoginServlet extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Connect to the database
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+            try (Connection conn = DBConnection.getConnection();) {
                 // Query to check user credentials and role
                 String sql = "SELECT * FROM user WHERE username = ? AND password = ? AND role = ?";
                 try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -71,4 +69,6 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
+
+    
 }
