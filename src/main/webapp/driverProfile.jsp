@@ -13,24 +13,22 @@
     Integer userId = (Integer) session.getAttribute("userId");
 
     // Fetch user profile details from the database using the userId
-    String firstName = "";
-    String lastName = "";
-    String email = "";
+    String Name = "";
+    String license = "";
     String phone = "";
-    String nic = "";
+
 
     if (userId != null) {
         try (Connection conn = DBConnection.getConnection()) {
-            String sql = "SELECT firstName, lastName, email, nic,mobile FROM customer WHERE userId = ?";
+            String sql = "SELECT name, licenseNo,mobile FROM driver WHERE userId = ?";
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setInt(1, userId);
                 ResultSet rs = stmt.executeQuery();
                 if (rs.next()) {
-                    firstName = rs.getString("firstName");
-                    lastName = rs.getString("lastName");
-                    email = rs.getString("email");
+                    Name = rs.getString("name");
+                    license = rs.getString("licenseNo");
                     phone = rs.getString("mobile");
-                    nic = rs.getString("nic");
+
                 }
             }
         } catch (SQLException e) {
@@ -65,30 +63,24 @@
                 <div class="card shadow-lg p-4">
                     <div class="text-center">
                         <img src="IMAGES/pp.png" class="rounded-circle border border-3 border-primary" width="120" height="120" alt="Profile Picture">
-                        <h2 class="mt-2"><%= firstName + " " + lastName %></h2>
+                        <h2 class="mt-2"><%= Name %></h2>
                         <p class="text-muted"><%= role %></p>
                     </div>
                     <form>
                         <div class="mb-3">
                             <label class="form-label">First Name</label>
-                            <input type="text" class="form-control" value="<%= firstName %>" readonly>
+                            <input type="text" class="form-control" value="<%= Name %>" readonly>
                         </div>
+                        
                         <div class="mb-3">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" class="form-control" value="<%= lastName %>" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" value="<%= email %>" readonly>
+                            <label class="form-label">License No</label>
+                            <input type="email" class="form-control" value="<%= license %>" readonly>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Phone Number</label>
                             <input type="text" class="form-control" value="<%= phone %>" readonly>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">NIC</label>
-                            <input type="text" class="form-control" value="<%= nic %>" readonly>
-                        </div>
+                        
                         <div class="text-center">
                             <button type="submit" class="btn btn-success w-100" disabled>Save Changes</button>
                         </div>

@@ -31,7 +31,7 @@
         <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><img src="IMAGES/lines.png" style="height: 35px;" alt="alt"/></button>
         <a class="navbar-brand fw-bold" href="#">🚖 Mega City Cab</a>
         <div>
-            <a href="#" class="text-white me-3">Profile</a>
+            <span class="text-white me-3">👤 <%= username %></span>
             <a href="logoutServlet" class="btn btn-danger btn-sm">Logout</a>
         </div>
     </nav>
@@ -48,8 +48,8 @@
                         <ul class="nav flex-column">
                         <li class="nav-item"><a href="bookRide.jsp" class="nav-link">📌 Book a Ride</a></li>
                         <li class="nav-item"><a href="rideHistory.jsp" class="nav-link">📜 Ride History</a></li>
-                        <li class="nav-item"><a href="customerProfile.jsp" class="nav-link">👤 Profile</a></li>
-                        <li class="nav-item"><a href="index.html" class="nav-link text-danger">🚪 Logout</a></li>
+                        <li class="nav-item"><a href="driverProfile.jsp" class="nav-link">👤 Profile</a></li>
+                        <li class="nav-item"><a href="logoutServlet" class="nav-link text-danger">🚪 Logout</a></li>
                     </ul>
                     </div>
                 </div>

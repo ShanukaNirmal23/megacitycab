@@ -51,7 +51,7 @@
                             <li class="nav-item"><a href="bookRide.jsp" class="nav-link">📌 Book a Ride</a></li>
                             <li class="nav-item"><a href="rideHistory.jsp" class="nav-link">📜 Ride History</a></li>
                             <li class="nav-item"><a href="customerProfile.jsp" class="nav-link">👤 Profile</a></li>
-                            <li class="nav-item"><a href="logout.jsp" class="nav-link text-danger">🚪 Logout</a></li>
+                            <li class="nav-item"><a href="logoutServlet" class="nav-link text-danger">🚪 Logout</a></li>
                         </ul>
                     </div>
                 </div>
