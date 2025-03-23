@@ -20,60 +20,50 @@ import java.sql.SQLException;
 @WebServlet("/BookRideServlet")
 public class BookRideServlet extends HttpServlet {
 
-   @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Retrieve username from the session
-        HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("username");
-
-        // Check if the user is logged in
-        if (username == null) {
-            response.sendRedirect("index.jsp"); // Redirect to login page if the user is not logged in
-            return;
-        }
-
         // Retrieve form data
-        String pickupLocation = request.getParameter("pickupLocation");
-        String dropLocation = request.getParameter("dropLocation");
+        String pickup = request.getParameter("pickup");
+        String drop = request.getParameter("drop");
         String rideType = request.getParameter("rideType");
         String fare = request.getParameter("fare");
+
+//        // Get customer ID from session
+//        HttpSession session = request.getSession();
+        Integer customerId = 1;
+//
+//        if (customerId == null) {
+//            // Redirect to login if customer is not logged in
+//            response.sendRedirect("index.jsp");
+//            return;
+//        }
 
         Connection conn = null;
         try {
             // Get a database connection
             conn = DBConnection.getConnection();
 
-            // Fetch customer ID from the database using the username
-            int customerId = 0;
-            String sqlFetchCustomerId = "SELECT id FROM user WHERE username = ?";
-            try (PreparedStatement stmtFetchCustomerId = conn.prepareStatement(sqlFetchCustomerId)) {
-                stmtFetchCustomerId.setString(1, username);
-                ResultSet rs = stmtFetchCustomerId.executeQuery();
-                if (rs.next()) {
-                    customerId = rs.getInt("id");
-                } else {
-                    // Customer not found
-                    request.setAttribute("errorMessage", "Customer not found. Please log in again.");
-                    request.getRequestDispatcher("bookride.jsp").forward(request, response);
-                    return;
-                }
+            // Step 1: Assign a driver (randomly for now)
+            int driverId = assignDriver(conn);
+
+            if (driverId == -1) {
+                // No available drivers
+                request.setAttribute("errorMessage", "No drivers available at the moment. Please try again later.");
+                request.getRequestDispatcher("bookRide.jsp").forward(request, response);
+                return;
             }
 
-            // Default values for driver_id and status
-            int driverId = 1; // Assign a default driver (e.g., driver with ID 1)
-            String status = "Pending"; // Default status
-
-            // Insert booking details into the database
+            // Step 2: Insert booking into the database
             String sqlInsertBooking = "INSERT INTO booking (customerId, driverId, pickup, drop, ride_type, fare, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement stmtInsertBooking = conn.prepareStatement(sqlInsertBooking)) {
                 stmtInsertBooking.setInt(1, customerId);
                 stmtInsertBooking.setInt(2, driverId);
-                stmtInsertBooking.setString(3, pickupLocation);
-                stmtInsertBooking.setString(4, dropLocation);
+                stmtInsertBooking.setString(3, pickup);
+                stmtInsertBooking.setString(4, drop);
                 stmtInsertBooking.setString(5, rideType);
                 stmtInsertBooking.setString(6, fare);
-                stmtInsertBooking.setString(7, status);
+                stmtInsertBooking.setInt(7, 1); // Status ID 1 = "Pending"
 
                 int rowsInserted = stmtInsertBooking.executeUpdate();
                 if (rowsInserted > 0) {
@@ -81,18 +71,33 @@ public class BookRideServlet extends HttpServlet {
                     response.sendRedirect("bookingConfirmation.jsp");
                 } else {
                     // Booking failed
-                    request.setAttribute("errorMessage", "Booking failed. Please try again.");
-                    request.getRequestDispatcher("bookride.jsp").forward(request, response);
+                    request.setAttribute("errorMessage", "Failed to book the ride. Please try again.");
+                    request.getRequestDispatcher("bookRide.jsp").forward(request, response);
                 }
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "An error occurred. Please try again.");
-            request.getRequestDispatcher("bookride.jsp").forward(request, response);
+            request.getRequestDispatcher("bookRide.jsp").forward(request, response);
         } finally {
             // Close the connection
             DBConnection.closeConnection(conn);
         }
+    }
+
+    /**
+     * Assigns a driver randomly (for demo purposes).
+     * In a real application, this should check driver availability and proximity.
+     */
+    private int assignDriver(Connection conn) throws SQLException {
+        String sqlGetDriver = "SELECT driverId FROM driver ORDER BY RAND() LIMIT 1";
+        try (PreparedStatement stmtGetDriver = conn.prepareStatement(sqlGetDriver)) {
+            ResultSet rs = stmtGetDriver.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("driverId");
+            }
+        }
+        return -1; // No drivers available
     }
 
 }

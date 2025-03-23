@@ -32,12 +32,12 @@
                             <!-- Pickup Location -->
                             <div class="mb-3">
                                 <label class="form-label">Pickup Location</label>
-                                <input type="text" id="pickup" name="pickupLocation" class="form-control" placeholder="Enter pickup location" required>
+                                <input type="text" id="pickup" name="pickup" class="form-control" placeholder="Enter pickup location" required>
                             </div>
                             <!-- Drop Location -->
                             <div class="mb-3">
                                 <label class="form-label">Drop Location</label>
-                                <input type="text" id="drop" name="dropLocation" class="form-control" placeholder="Enter drop location" required>
+                                <input type="text" id="drop" name="drop" class="form-control" placeholder="Enter drop location" required>
                             </div>
                             <!-- Ride Type -->
                             <div class="mb-3">
@@ -127,6 +127,11 @@
             let totalFare = distance * fare;
             document.getElementById("fare").value = "Rs. " + totalFare + " (Estimated)";
         }
+
+        // Display alert if there is an error message
+        <% if (request.getAttribute("errorMessage") != null) { %>
+            alert("<%= request.getAttribute("errorMessage") %>");
+        <% } %>
     </script>
 </body>
 </html>

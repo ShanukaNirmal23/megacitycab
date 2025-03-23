@@ -12,63 +12,61 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
+ @Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    // Retrieve form data
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String role = request.getParameter("role");
+    Connection conn = null;
+    try {
+        // Get a database connection
+        conn = DBConnection.getConnection();
 
-        try {
-            // Load MySQL JDBC driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        // Step 1: Authenticate the user using the `user` table
+        String sqlAuthenticateUser = "SELECT userId, role FROM user WHERE username = ? AND password = ?";
+        try (PreparedStatement stmtAuthenticateUser = conn.prepareStatement(sqlAuthenticateUser)) {
+            stmtAuthenticateUser.setString(1, username);
+            stmtAuthenticateUser.setString(2, password);
 
-            // Connect to the database
-            try (Connection conn = DBConnection.getConnection();) {
-                // Query to check user credentials and role
-                String sql = "SELECT * FROM user WHERE username = ? AND password = ? AND role = ?";
-                try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                    stmt.setString(1, username);
-                    stmt.setString(2, password); // In real-world apps, use hashed passwords
-                    stmt.setString(3, role);
+            ResultSet rs = stmtAuthenticateUser.executeQuery();
+            if (rs.next()) {
+                // Login successful
+                int userId = rs.getInt("userId");
+                String role = rs.getString("role");
 
-                    ResultSet rs = stmt.executeQuery();
-                    if (rs.next()) {
-                        // Login successful
-                        HttpSession session = request.getSession();
-                        session.setAttribute("username", username);
-                        session.setAttribute("role", role);
+                // Create a session and store user details
+                HttpSession session = request.getSession();
+                session.setAttribute("username", username);
+                session.setAttribute("role", role);
+                session.setAttribute("userId", userId);
 
-                        // Redirect based on role
-                        switch (role) {
-                            case "customer":
-                                response.sendRedirect("customerHome.jsp");
-                                break;
-                            case "driver":
-                                response.sendRedirect("driverHome.jsp");
-                                break;
-                            default:
-                                response.sendRedirect("index.jsp");
-                                break;
-                        }
-                    } else {
-                        // Login failed
-                        request.setAttribute("errorMessage", "Invalid username, password, or role.");
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
-                    }
+                // Redirect based on role
+                if (role.equals("customer")) {
+                    response.sendRedirect("customerHome.jsp");
+                } else if (role.equals("driver")) {
+                    response.sendRedirect("driverHome.jsp");
                 }
+            } else {
+                // Login failed
+                request.setAttribute("errorMessage", "Invalid username or password.");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("errorMessage", "An error occurred. Please try again.");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
+    } catch (ClassNotFoundException | SQLException e) {
+        e.printStackTrace();
+        request.setAttribute("errorMessage", "An error occurred. Please try again.");
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    } finally {
+        // Close the connection
+        DBConnection.closeConnection(conn);
     }
-
+}
     
 }

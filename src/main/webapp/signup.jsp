@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -37,6 +38,14 @@
                             <!-- Mobile -->
                             <div class="mb-3">
                                 <input type="tel" name="mobile" class="form-control" placeholder="Mobile" required>
+                            </div>
+                            <!-- Username -->
+                            <div class="mb-3">
+                                <input type="text" name="username" class="form-control" placeholder="Username" required>
+                            </div>
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <input type="password" name="password" class="form-control" placeholder="Password" required>
                             </div>
                             <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary w-100">Sign Up</button>
