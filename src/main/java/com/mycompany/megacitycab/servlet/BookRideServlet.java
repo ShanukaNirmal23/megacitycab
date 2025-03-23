@@ -46,7 +46,7 @@ public class BookRideServlet extends HttpServlet {
             int driverId = getRandomDriver(conn);
 
             // Insert booking details
-            String sql = "INSERT INTO booking (customerId, driverId, pickup, drop, ride_type, fare, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO booking (customerId, driverId, pickup, dropLocation, ride_type, fare, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, 1);
             stmt.setInt(2, driverId);

@@ -32,7 +32,7 @@
         <a class="navbar-brand fw-bold" href="#">🚖 Mega City Cab</a>
         <div>
             <a href="#" class="text-white me-3">Profile</a>
-            <a href="index.html" class="btn btn-danger btn-sm">Logout</a>
+            <a href="logoutServlet" class="btn btn-danger btn-sm">Logout</a>
         </div>
     </nav>
 

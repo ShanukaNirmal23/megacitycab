@@ -34,7 +34,7 @@
             <a class="navbar-brand fw-bold" href="#">🚖 Mega City Cab</a>
             <div>
                 <span class="text-white me-3">👤 <%= username %></span>
-                <a href="logout.jsp" class="btn btn-danger btn-sm">Logout</a>
+                <a href="logoutServlet" class="btn btn-danger btn-sm">Logout</a>
             </div>
         </nav>
 
