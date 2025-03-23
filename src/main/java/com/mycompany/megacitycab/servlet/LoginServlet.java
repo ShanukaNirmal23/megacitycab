@@ -17,56 +17,66 @@ import java.sql.SQLException;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
- @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    // Retrieve form data
-    String username = request.getParameter("username");
-    String password = request.getParameter("password");
+ private static final long serialVersionUID = 1L;
 
-    Connection conn = null;
-    try {
-        // Get a database connection
-        conn = DBConnection.getConnection();
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
 
-        // Step 1: Authenticate the user using the `user` table
-        String sqlAuthenticateUser = "SELECT userId, role FROM user WHERE username = ? AND password = ?";
-        try (PreparedStatement stmtAuthenticateUser = conn.prepareStatement(sqlAuthenticateUser)) {
-            stmtAuthenticateUser.setString(1, username);
-            stmtAuthenticateUser.setString(2, password);
+        Connection conn = null;
+        try {
+            conn = DBConnection.getConnection();
+            String sql = "SELECT userId, role FROM user WHERE username = ? AND password = ?";
 
-            ResultSet rs = stmtAuthenticateUser.executeQuery();
-            if (rs.next()) {
-                // Login successful
-                int userId = rs.getInt("userId");
-                String role = rs.getString("role");
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, username);
+                stmt.setString(2, password);
+                ResultSet rs = stmt.executeQuery();
 
-                // Create a session and store user details
-                HttpSession session = request.getSession();
-                session.setAttribute("username", username);
-                session.setAttribute("role", role);
-                session.setAttribute("userId", userId);
+                if (rs.next()) {
+                    int userId = rs.getInt("userId");
+                    String role = rs.getString("role");
 
-                // Redirect based on role
-                if (role.equals("customer")) {
-                    response.sendRedirect("customerHome.jsp");
-                } else if (role.equals("driver")) {
-                    response.sendRedirect("driverHome.jsp");
+                    // Destroy old session if exists, then create a new one
+                    HttpSession oldSession = request.getSession(false);
+                    if (oldSession != null) {
+                        oldSession.invalidate();
+                    }
+
+                    HttpSession session = request.getSession(true);
+                    session.setMaxInactiveInterval(30 * 60); // Session timeout (30 minutes)
+
+                    // Store user details in session
+                    session.setAttribute("username", username);
+                    session.setAttribute("role", role);
+                    session.setAttribute("userId", userId);
+
+                    // Redirect based on role
+                    if (role.equals("customer")) {
+                        response.sendRedirect("customerHome.jsp");
+                    } else if (role.equals("driver")) {
+                        response.sendRedirect("driverHome.jsp");
+                    } else if (role.equals("admin")) {
+                        response.sendRedirect("adminDashboard.jsp");
+                    } else {
+                        session.invalidate(); // Unknown role, invalidate session
+                        request.setAttribute("errorMessage", "Unauthorized access.");
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                    }
+                } else {
+                    request.setAttribute("errorMessage", "Invalid username or password.");
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
-            } else {
-                // Login failed
-                request.setAttribute("errorMessage", "Invalid username or password.");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "An error occurred. Please try again.");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } finally {
+            DBConnection.closeConnection(conn);
         }
-    } catch (ClassNotFoundException | SQLException e) {
-        e.printStackTrace();
-        request.setAttribute("errorMessage", "An error occurred. Please try again.");
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-    } finally {
-        // Close the connection
-        DBConnection.closeConnection(conn);
     }
-}
     
 }
