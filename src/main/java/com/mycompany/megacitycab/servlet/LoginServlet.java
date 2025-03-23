@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
                     int userId = rs.getInt("userId");
                     String role = rs.getString("role");
 
-                    // Destroy old session if exists, then create a new one
+                    
                     HttpSession oldSession = request.getSession(false);
                     if (oldSession != null) {
                         oldSession.invalidate();
@@ -48,12 +48,12 @@ public class LoginServlet extends HttpServlet {
                     HttpSession session = request.getSession(true);
                     session.setMaxInactiveInterval(30 * 60); // Session timeout (30 minutes)
 
-                    // Store user details in session
+                   
                     session.setAttribute("username", username);
                     session.setAttribute("role", role);
                     session.setAttribute("userId", userId);
 
-                    // Redirect based on role
+                    
                     if (role.equals("customer")) {
                         response.sendRedirect("customerHome.jsp");
                     } else if (role.equals("driver")) {
@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
                     } else if (role.equals("admin")) {
                         response.sendRedirect("adminDashboard.jsp");
                     } else {
-                        session.invalidate(); // Unknown role, invalidate session
+                        session.invalidate(); 
                         request.setAttribute("errorMessage", "Unauthorized access.");
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     }

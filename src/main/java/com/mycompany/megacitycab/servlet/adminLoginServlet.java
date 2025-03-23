@@ -29,8 +29,8 @@ public class adminLoginServlet extends HttpServlet {
 
             if (rs.next()) {
                 HttpSession session = request.getSession();
-                session.setAttribute("admin", username);  // Set admin session
-                response.sendRedirect("adminDashboard.jsp"); // Redirect to Admin Dashboard
+                session.setAttribute("admin", username);  
+                response.sendRedirect("adminDashboard.jsp"); 
             } else {
                 request.setAttribute("errorMessage", "Invalid username or password!");
                 request.getRequestDispatcher("adminLogin.jsp").forward(request, response);

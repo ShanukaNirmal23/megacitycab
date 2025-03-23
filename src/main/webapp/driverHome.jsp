@@ -1,6 +1,17 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="jakarta.servlet.http.HttpSession"%>
+<%
+    // Check if the user is logged in
+    HttpSession sessionObj = request.getSession(false);
+    if (sessionObj == null || sessionObj.getAttribute("username") == null) {
+        response.sendRedirect("index.jsp"); // Redirect to login page if not logged in
+        return;
+    }
+
+    // Retrieve user details from the session
+    String username = (String) sessionObj.getAttribute("username");
+    String role = (String) sessionObj.getAttribute("role");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>

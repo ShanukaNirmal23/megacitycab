@@ -28,7 +28,7 @@ public class signUpServlet extends HttpServlet {
    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Retrieve form data
+
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
@@ -41,32 +41,31 @@ public class signUpServlet extends HttpServlet {
 
         Connection conn = null;
         try {
-            // Get a database connection
             conn = DBConnection.getConnection();
 
-            // Step 1: Insert user credentials into the `users` table
+           
             String sqlInsertUser = "INSERT INTO user (username, password, role) VALUES (?, ?, 'customer')";
             int userId = 0;
             try (PreparedStatement stmtInsertUser = conn.prepareStatement(sqlInsertUser, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 stmtInsertUser.setString(1, username);
-                stmtInsertUser.setString(2, password); // In real-world apps, use hashed passwords
+                stmtInsertUser.setString(2, password); 
 
                 int rowsInserted = stmtInsertUser.executeUpdate();
                 if (rowsInserted > 0) {
-                    // Retrieve the auto-generated user ID
+                
                     ResultSet rs = stmtInsertUser.getGeneratedKeys();
                     if (rs.next()) {
-                        userId = rs.getInt(1); // Get the generated user ID
+                        userId = rs.getInt(1); 
                     }
                 } else {
-                    // User insertion failed
+                
                     request.setAttribute("errorMessage", "Signup failed. Please try again.");
                     request.getRequestDispatcher("signup.jsp").forward(request, response);
                     return;
                 }
             }
 
-            // Step 2: Insert customer details into the `customers` table
+            
             if (userId > 0) {
                 String sqlInsertCustomer = "INSERT INTO customer (userId, firstname, lastname, email, nic, mobile) VALUES (?, ?, ?, ?, ?, ?)";
                 try (PreparedStatement stmtInsertCustomer = conn.prepareStatement(sqlInsertCustomer)) {
@@ -80,15 +79,15 @@ public class signUpServlet extends HttpServlet {
                     int rowsInserted = stmtInsertCustomer.executeUpdate();
                     if (rowsInserted > 0) {
                         // Signup successful
-                        response.sendRedirect("index.jsp?success=1"); // Redirect to login page with success message
+                        response.sendRedirect("index.jsp?success=1"); 
                     } else {
-                        // Customer insertion failed
+                       
                         request.setAttribute("errorMessage", "Signup failed. Please try again.");
                         request.getRequestDispatcher("signup.jsp").forward(request, response);
                     }
                 }
             } else {
-                // User ID not generated
+               
                 request.setAttribute("errorMessage", "Signup failed. Please try again.");
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
             }
@@ -97,7 +96,7 @@ public class signUpServlet extends HttpServlet {
             request.setAttribute("errorMessage", "An error occurred. Please try again.");
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         } finally {
-            // Close the connection
+
             DBConnection.closeConnection(conn);
         }
     }
